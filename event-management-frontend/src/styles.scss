@@ -1,0 +1,57 @@
+/* Global styles */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  
+  .invalid-feedback {
+    display: block;
+  }
+  
+  .cursor-pointer {
+    cursor: pointer;
+  }
+  
+  .form-error {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+  
+  /* Custom button styles */
+  .btn-primary {
+    background-color: #3f51b5;
+    border-color: #3f51b5;
+  }
+  
+  .btn-primary:hover {
+    background-color: #303f9f;
+    border-color: #303f9f;
+  }
+  
+  /* Card styles */
+  .card {
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .card:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+  }
+  
+  /* Transitions */
+  .fade-in {
+    animation: fadeIn 0.5s;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }

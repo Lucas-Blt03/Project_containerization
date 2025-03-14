@@ -110,6 +110,6 @@ app.get('/organizer', verifyToken, verifyRole('organizer'), (req, res) => {
 });
 
 // 🔹 Middleware global pour protéger tout sauf `/auth`
-app.use(/^(?!\/auth).*$/, verifyToken);
+//app.use(/^(?!\/auth).*$/, verifyToken);
 
 app.listen(5000, () => console.log('✅ Auth service running on port 5000'));

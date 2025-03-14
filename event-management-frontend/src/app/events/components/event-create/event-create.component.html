@@ -1,0 +1,166 @@
+<div class="container mt-4">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card shadow">
+          <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Create New Event</h3>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+              <div class="alert alert-danger" *ngIf="error">
+                {{ error }}
+              </div>
+  
+              <div class="mb-3">
+                <label for="title" class="form-label">Event Title*</label>
+                <input
+                  type="text"
+                  id="title"
+                  formControlName="title"
+                  class="form-control"
+                  [ngClass]="{'is-invalid': eventForm.get('title')?.invalid && eventForm.get('title')?.touched}"
+                />
+                <div class="invalid-feedback" *ngIf="eventForm.get('title')?.errors?.['required'] && eventForm.get('title')?.touched">
+                  Title is required
+                </div>
+                <div class="invalid-feedback" *ngIf="eventForm.get('title')?.errors?.['minlength'] && eventForm.get('title')?.touched">
+                  Title must be at least 5 characters
+                </div>
+                <div class="invalid-feedback" *ngIf="eventForm.get('title')?.errors?.['maxlength'] && eventForm.get('title')?.touched">
+                  Title cannot exceed 100 characters
+                </div>
+              </div>
+  
+              <div class="mb-3">
+                <label for="description" class="form-label">Description*</label>
+                <textarea
+                  id="description"
+                  formControlName="description"
+                  class="form-control"
+                  rows="5"
+                  [ngClass]="{'is-invalid': eventForm.get('description')?.invalid && eventForm.get('description')?.touched}"
+                ></textarea>
+                <div class="invalid-feedback" *ngIf="eventForm.get('description')?.errors?.['required'] && eventForm.get('description')?.touched">
+                  Description is required
+                </div>
+                <div class="invalid-feedback" *ngIf="eventForm.get('description')?.errors?.['minlength'] && eventForm.get('description')?.touched">
+                  Description must be at least 20 characters
+                </div>
+              </div>
+  
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="date" class="form-label">Event Date*</label>
+                  <input
+                    type="date"
+                    id="date"
+                    formControlName="date"
+                    class="form-control"
+                    [ngClass]="{'is-invalid': eventForm.get('date')?.invalid && eventForm.get('date')?.touched}"
+                  />
+                  <div class="invalid-feedback" *ngIf="eventForm.get('date')?.errors?.['required'] && eventForm.get('date')?.touched">
+                    Event date is required
+                  </div>
+                </div>
+  
+                <div class="col-md-6 mb-3">
+                  <label for="category" class="form-label">Category*</label>
+                  <select
+                    id="category"
+                    formControlName="category"
+                    class="form-select"
+                    [ngClass]="{'is-invalid': eventForm.get('category')?.invalid && eventForm.get('category')?.touched}"
+                  >
+                    <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+                  </select>
+                  <div class="invalid-feedback" *ngIf="eventForm.get('category')?.errors?.['required'] && eventForm.get('category')?.touched">
+                    Category is required
+                  </div>
+                </div>
+              </div>
+  
+              <div class="mb-3">
+                <label for="location" class="form-label">Location*</label>
+                <input
+                  type="text"
+                  id="location"
+                  formControlName="location"
+                  class="form-control"
+                  [ngClass]="{'is-invalid': eventForm.get('location')?.invalid && eventForm.get('location')?.touched}"
+                />
+                <div class="invalid-feedback" *ngIf="eventForm.get('location')?.errors?.['required'] && eventForm.get('location')?.touched">
+                  Location is required
+                </div>
+              </div>
+  
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="capacity" class="form-label">Capacity*</label>
+                  <input
+                    type="number"
+                    id="capacity"
+                    formControlName="capacity"
+                    class="form-control"
+                    [ngClass]="{'is-invalid': eventForm.get('capacity')?.invalid && eventForm.get('capacity')?.touched}"
+                  />
+                  <div class="invalid-feedback" *ngIf="eventForm.get('capacity')?.errors?.['required'] && eventForm.get('capacity')?.touched">
+                    Capacity is required
+                  </div>
+                  <div class="invalid-feedback" *ngIf="eventForm.get('capacity')?.errors?.['min'] && eventForm.get('capacity')?.touched">
+                    Capacity must be at least 1
+                  </div>
+                </div>
+  
+                <div class="col-md-6 mb-3">
+                  <label for="price" class="form-label">Price*</label>
+                  <div class="input-group">
+                    <span class="input-group-text">$</span>
+                    <input
+                      type="number"
+                      id="price"
+                      formControlName="price"
+                      class="form-control"
+                      [ngClass]="{'is-invalid': eventForm.get('price')?.invalid && eventForm.get('price')?.touched}"
+                    />
+                    <div class="invalid-feedback" *ngIf="eventForm.get('price')?.errors?.['required'] && eventForm.get('price')?.touched">
+                      Price is required
+                    </div>
+                    <div class="invalid-feedback" *ngIf="eventForm.get('price')?.errors?.['min'] && eventForm.get('price')?.touched">
+                      Price cannot be negative
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="mb-3">
+                <label for="imageUrl" class="form-label">Image URL</label>
+                <input
+                  type="url"
+                  id="imageUrl"
+                  formControlName="imageUrl"
+                  class="form-control"
+                  placeholder="https://example.com/image.jpg"
+                />
+                <div class="form-text">Optional. Provide a URL to an image for your event.</div>
+              </div>
+  
+              <div class="d-flex justify-content-between mt-4">
+                <a routerLink="/events" class="btn btn-outline-secondary">
+                  <i class="fas fa-times me-2"></i>Cancel
+                </a>
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  [disabled]="isSubmitting"
+                >
+                  <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                  <i *ngIf="!isSubmitting" class="fas fa-save me-2"></i>Create Event
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,7 @@
+frontend:
+  build: ./event-management-frontend
+  container_name: frontend
+  ports:
+    - "80:80"
+  networks:
+    - event-network

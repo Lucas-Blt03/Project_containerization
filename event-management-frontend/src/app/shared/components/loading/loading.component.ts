@@ -1,0 +1,12 @@
+import { Component, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-loading',
+  templateUrl: './loading.component.html',
+  styleUrls: ['./loading.component.scss']
+})
+export class LoadingComponent {
+  @Input() isLoading = false;
+  @Input() message = 'Loading...';
+  @Input() overlay = false;
+}
